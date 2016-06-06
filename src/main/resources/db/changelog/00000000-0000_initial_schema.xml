@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <changeSet author="ntfc (generated)" id="1465249071041-1">
+        <createTable tableName="customer">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="customerPK"/>
+            </column>
+            <column name="username" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="points" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="ntfc (generated)" id="1465249071041-2">
+        <createTable tableName="film">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="filmPK"/>
+            </column>
+            <column name="title" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="release_type" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="ntfc (generated)" id="1465249071041-3">
+        <createTable tableName="rental">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="rentalPK"/>
+            </column>
+            <column name="start_date" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+            <column name="customer_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="ntfc (generated)" id="1465249071041-4">
+        <createTable tableName="rental_films">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="rental_filmsPK"/>
+            </column>
+            <column name="days_rented_for" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="return_date" type="timestamp"/>
+            <column name="surcharge_price" type="DOUBLE"/>
+            <column name="upfront_price" type="DOUBLE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="film_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="rental_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="ntfc (generated)" id="1465249071041-5">
+        <addForeignKeyConstraint baseColumnNames="rental_id" baseTableName="rental_films" constraintName="FK_3fky80jv91pp334fby5die7e5" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="rental"/>
+    </changeSet>
+    <changeSet author="ntfc (generated)" id="1465249071041-6">
+        <addForeignKeyConstraint baseColumnNames="customer_id" baseTableName="rental" constraintName="FK_q3q19s44hxsqi3ge3esmd3jl6" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="customer"/>
+    </changeSet>
+    <changeSet author="ntfc (generated)" id="1465249071041-7">
+        <addForeignKeyConstraint baseColumnNames="film_id" baseTableName="rental_films" constraintName="FK_tlpnk7xcslpq4l1gg4hbvvtqb" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="film"/>
+    </changeSet>
+</databaseChangeLog>
